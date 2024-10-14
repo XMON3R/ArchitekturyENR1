@@ -48,7 +48,7 @@ As a student I want to unenroll from a subject, because I want to be unenrolled 
 2. The system displays all subjects in which the student is currently enrolled.
 3. The student selects a subject to unenroll from.
 4. The system validates the unenrollment request:
-5. The informs the resulf of request:
+5. The system informs the resulf of request:
     <ol type="a">
         <li>If the unenrollment has not been succesfully accepted, the system notifies the student why the selected subject cannot be unenrolled.</li>
         <li>If the unenrollemnt has been succesfully accepted, the system shows a confirmation.</li>
