@@ -38,16 +38,37 @@ As a student, I want to enroll to a subject, because I must be enrolled to a sub
 * Ensure that the student is correctly enrolled to the selected subject
 * Ensure that all actions done are logged
 
+### Feature: Unenrolling from enrolled subject
 
-Unenrolling from enrolled subject
-2. As a student I want to unenroll from a subject, because I want to be unenrolled.
-Core -
-    1) Student opens the dashboard and opens Enrollement module.
-    2) Student displays their enrolled subjects.
-    3) Student selects the subject they want to unenroll from.
-        a) If the unenrollment is possible, the system unenrolls the selected subject.
-        b) If the unenrollment is not possible, the system notifies the student.
-    4) If the unenrollemnt has been succesfull, the system shows a confirmation.
+As a student I want to unenroll from a subject, because I want to be unenrolled from a subject.
+
+#### Feature breakdown
+
+1. The student opens the dashboard and opens enrollement module.
+2. The system displays all subjects in which the student is currently enrolled.
+3. The student selects a subject to unenroll from.
+4. The system validates the unenrollment request:
+5. The informs the resulf of request:
+<ol type="a">
+    <li>If the unenrollment has not been succesfully accepted, the system notifies the student why the selected subject cannot be unenrolled.</li>
+    <li>If the unenrollemnt has been succesfully accepted, the system shows a confirmation.</li>
+</ol>
+
+#### Responsibilities
+
+##### Display responsibilities
+* Display the list of subjects in which the student is enrolled.
+* Display a selector to choose a specific subject for unenrollment.
+
+##### Validation responsibilities
+* Check if the unenrollment request meets specific criteria.
+* Check if there was some error during the unenrollment request.
+
+##### Processing responsibilities
+* Remove the subject from the students list of enrolled subjects.
+
+##### Notification responsibilities
+* Notify the student if request was success or not.
 
 ### Feature: Viewing enrolled subjects 
 As a student I want to view subjects I am enrolled to, because I want to know them. 
