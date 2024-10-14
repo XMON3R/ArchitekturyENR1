@@ -49,9 +49,20 @@ Core -
         b) If the unenrollment is not possible, the system notifies the student.
     4) If the unenrollemnt has been succesfull, the system shows a confirmation.
 
-Viewing enrolled subjects
-3. As a student I want to view subject I am enrolled to, because I want to know them.
-Core -
+### Feature: Viewing enrolled subjects 
+As a student I want to view subjects I am enrolled to, because I want to know them. 
+
+#### Feature breakdown
+
+1. Student opens the dashboard and opens Enrollment module.
+2. In the Enrollment module student opens Enrolled module.
+2. The student selects for which semester they want to see the Enrollement information.
+3. The system displays all enrolled subjects for selected year.
+
+#### Responsibilities
+
+##### Subject viewing responsibilities
+* Display information of all enrolled subjects for the student.
 
 Viewing overlaping subjects
 4. As a student I want to know overlaping subjects I am enrolled to, because I want to attend them in person.
