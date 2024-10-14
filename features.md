@@ -1,15 +1,42 @@
-Enrolment
 
-Enrolling to new subject
-1. As a student I want to enroll to a subject, because I want to be enrolled in that subject.
-Core -
-    1) Student opens a dashboard and opens Enrollment module.
-    2) Student displays available subjects for enrollment.
-    3) Student selects a subject from the displayed subjects to enroll to.
-        a) If the subject is full, the system offers the student to be placed in the subject's queue.
-        b) If the subject has available space, the system enrolls the student to the selected subject.
-    4) If the student has been succesfully enrolled to the selected subject, the system shows a confirmation.
-Responsibilities
+# Enrollment System
+
+## Core features and responsibilities
+
+### Feature: Enrolling to a new subject
+
+As a student, I want to enroll to a subject, because I must be enrolled to a subject to be able to get credits for it.
+
+#### Feature breakdown
+
+1. Student opens the dashboard and opens Enrollment module.
+2. Student views available subjects.
+3. System displays all available subjects.
+4. Student selects a subject to enroll to.
+5. System validates the enrollment request.
+6. If the request is denied:
+    <ol type="a">
+        <li>System notifies the student that their request has been denied and informs them of the reason for the denial.</li>
+        <li>In case the subject's capacity is full, the system offers to the student to be place in a queue for the subject.</li>
+    </ol>
+7. If the request has been successfully validated, the system processes the request internally and informs the student.
+
+#### Responsibilities
+
+##### Subject viewing and interaction responsibilities
+* Display information of available subjects for the student
+* Ensure enrollment requests can be made
+
+##### Enrollment validation responsibilities
+* Validate student credentials, prerequisites
+* Validate availability of space for selected subject
+* Inform student of any issues that occured during validation
+* Offer to place the student into an enrollemnt queue for the selected subject
+
+##### Enrollment processing responsibilities
+* Ensure enrollment requests are correctly processed
+* Ensure that the student is correctly enrolled to the selected subject
+* Ensure that all actions done are logged
 
 
 Unenrolling from enrolled subject
