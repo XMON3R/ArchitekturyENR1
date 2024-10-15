@@ -97,9 +97,29 @@ Notifying enrolled students
 6. As a teacher I want to notify all enrolled students, because I want to inform students.
 Function -
 
-Enrolling a student to a teacher's subject
-7. As a teacher I want to be able to enroll a student to my subject, because I want
-Core -
+### Feature: Enrolling a student to a teacher's subject
+
+As a teacher, I want to be able to enroll a student to my subject, because for some reason the student couldn't do that himself or from the queue.
+
+#### Feature breakdown:
+    
+1. The teacher opens the dashboard and chooses Enrollment module
+2. The system displays all of his active classes.
+3. The teacher selects the class, which he wants to enroll the student in.
+4. The teacher enrolls the student to the chosen class.
+5. The system validates the enrollment request.
+6. If the request is denied, the system notifies the teacher that the request has been denied and displays the reason
+6. If the request is accepted the system informs the teacher and also sends confirmation email to the student.
+
+#### Responsibilities:
+
+##### Enrollment validation responsibilities
+* Validate student credentials, prerequisites
+* Inform teacher of any issues that occured during validation
+
+#### Notification responsibilities
+* Send email notifcation to the student with the confirmation message and details about the enrollment.
+
 
 Creating a pre-planned enrollment schedule
 8. As a student I want to be able to create a pre-planned enrollment schedule, because I want to enroll to all these subjects at once.
