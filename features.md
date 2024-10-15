@@ -159,10 +159,27 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 * Notify the student promptly of the outcome of the request.
 
 --------------------------------------------------------------------------------------------------------------------
+### Feature: Viewing subjects available for enrollment
 
+#### Feature breakdown
+1. Student opens the dashboard and navigates to the Enrollment module.
+2. Student views all subjects.
+3. System displays subjects on the screen.
+4. Student filters the subjects by availibility for enrollment.
+5. System displays subjects that are only available for enrollment.
+
+### Responsibilities
+
+##### Subject viewing responsibilities
+* Display information of all subjects for the student.
+
+##### Filtering responsibility
+* Filter available subjects for the student.
+
+--------------------------------------------------------------------------------------------------------------------
 
 Viewing overlaping subjects
-4. As a student I want to know overlaping subjects I am enrolled to, because I want to attend them in person.
+1. As a student I want to know overlaping subjects I am enrolled to, because I want to attend them in person.
 Function -
 
 Enqueuing to a subject queue.
