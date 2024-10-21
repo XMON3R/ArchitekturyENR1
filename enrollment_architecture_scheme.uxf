@@ -1,0 +1,45 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Validate availability of
+space for selected subject</help_text><element><id>UMLUseCase</id><coordinates><x>232</x><y>192</y><w>160</w><h>80</h></coordinates><panel_attributes>Display information of 
+available subjects for the student</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>224</x><y>336</y><w>136</w><h>72</h></coordinates><panel_attributes>Validate availability of 
+space for selected subject
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>376</x><y>408</y><w>160</w><h>48</h></coordinates><panel_attributes>Ensure enrollment
+requests can be made
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1120</x><y>200</y><w>152</w><h>88</h></coordinates><panel_attributes>Offer to place the student 
+into an enrollemnt queue 
+for the selected subject
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>656</x><y>664</y><w>152</w><h>72</h></coordinates><panel_attributes>Ensure that all actions
+ done are logged
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>368</x><y>480</y><w>192</w><h>56</h></coordinates><panel_attributes>Ensure enrollment requests
+are correctly processed
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>544</x><y>416</y><w>200</w><h>64</h></coordinates><panel_attributes>Ensure that the student is 
+correctly enrolled to the selected subject
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>592</x><y>200</y><w>168</w><h>80</h></coordinates><panel_attributes>Display a selector to choose
+a specific subject for unenrollment.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>368</x><y>336</y><w>168</w><h>64</h></coordinates><panel_attributes>Check if the unenrollment
+request meets specific criteria</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>232</x><y>664</y><w>176</w><h>80</h></coordinates><panel_attributes>Remove the subject from 
+the students list of enrolled subjects.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>936</x><y>200</y><w>160</w><h>80</h></coordinates><panel_attributes>Notify the student about the
+enrollment request
+result</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>584</x><y>488</y><w>144</w><h>48</h></coordinates><panel_attributes>Validate student 
+credentials</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>784</x><y>200</y><w>144</w><h>80</h></coordinates><panel_attributes>Inform teacher of the 
+result of the
+validation</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>896</x><y>696</y><w>168</w><h>88</h></coordinates><panel_attributes>Send email notification to
+the student with the confirmation 
+message and details about
+the enrollment.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>168</y><w>1184</w><h>128</h></coordinates><panel_attributes>--
+Presentation</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>576</y><w>1184</w><h>232</h></coordinates><panel_attributes>--
+Infrastructure</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>424</x><y>608</y><w>160</w><h>80</h></coordinates><panel_attributes>Get information of 
+available subjects for the student</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>416</x><y>704</y><w>176</w><h>80</h></coordinates><panel_attributes>Add the subject to 
+the students list of enrolled subjects.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>216</x><y>416</y><w>144</w><h>80</h></coordinates><panel_attributes>Validate teachers request</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>568</x><y>336</y><w>144</w><h>48</h></coordinates><panel_attributes>Validate student 
+prerequisites</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1120</x><y>368</y><w>144</w><h>88</h></coordinates><panel_attributes>Place the student to
+ the enrollement queue
+for the selected subject
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>1120</x><y>592</y><w>144</w><h>80</h></coordinates><panel_attributes>Place the student to
+ the enrollement queue
+for the selected subject</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>208</x><y>312</y><w>560</w><h>240</h></coordinates><panel_attributes>Enrollment validator</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1112</x><y>176</y><w>176</w><h>616</h></coordinates><panel_attributes>Queue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>904</x><y>608</y><w>160</w><h>80</h></coordinates><panel_attributes>Send email notification to
+the student about
+enrollment from the queue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>208</x><y>176</y><w>560</w><h>112</h></coordinates><panel_attributes>Dashboard</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>408</x><y>200</y><w>176</w><h>80</h></coordinates><panel_attributes>Display information of all
+enrolled subjects for the student.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>648</x><y>584</y><w>168</w><h>208</h></coordinates><panel_attributes>Logger
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>208</x><y>584</y><w>400</w><h>208</h></coordinates><panel_attributes>Enrollment repository</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>104</x><y>144</y><w>1216</w><h>680</h></coordinates><panel_attributes>Enrollment</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>776</x><y>176</y><w>328</w><h>112</h></coordinates><panel_attributes>Notification center</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>304</y><w>1184</w><h>256</h></coordinates><panel_attributes>--
+Business</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>824</x><y>312</y><w>248</w><h>240</h></coordinates><panel_attributes>Enrollment provider</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>896</x><y>368</y><w>104</w><h>40</h></coordinates><panel_attributes>Enroll to the subject</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>864</x><y>584</y><w>232</w><h>208</h></coordinates><panel_attributes>Mail Server</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>896</x><y>456</y><w>112</w><h>48</h></coordinates><panel_attributes>Unenroll from
+the subject</panel_attributes><additional_attributes></additional_attributes></element></diagram>
