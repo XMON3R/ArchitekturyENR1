@@ -1,0 +1,143 @@
+{
+  "configuration" : { },
+  "description" : "Level 1",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2024-11-06T20:23:58Z",
+  "model" : {
+    "people" : [ {
+      "description" : "studies at the school and needs to be enrolled in courses",
+      "id" : "4",
+      "location" : "Unspecified",
+      "name" : "Student",
+      "properties" : {
+        "structurizr.dsl.identifier" : "student"
+      },
+      "relationships" : [ {
+        "description" : "uses the system to get enrolled in subjects and view them",
+        "destinationId" : "1",
+        "id" : "7",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "needs to manage taught lectures, their capacities and enrollment queues",
+      "id" : "5",
+      "location" : "Unspecified",
+      "name" : "Teacher/Authority",
+      "properties" : {
+        "structurizr.dsl.identifier" : "teacher"
+      },
+      "relationships" : [ {
+        "description" : "uses the system to manage his courses and to edit queues",
+        "destinationId" : "1",
+        "id" : "6",
+        "sourceId" : "5",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Provides functionality related to subject enrollment such as enroll and unenroll, request validation and notifications, also can change capacity of subjects and provides the ability to get placed in queue.",
+      "documentation" : { },
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Enrollment System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "enrollment"
+      },
+      "relationships" : [ {
+        "description" : "Sends notifications and information",
+        "destinationId" : "2",
+        "id" : "8",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "External system to provide desired mail notifications",
+      "documentation" : { },
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Mail Server",
+      "properties" : {
+        "structurizr.dsl.identifier" : "mail_server"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "holds basic information about enrolled students for course enrollment management and all subjects and their teacher",
+      "documentation" : { },
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "School Database",
+      "properties" : {
+        "structurizr.dsl.identifier" : "school_dtb"
+      },
+      "relationships" : [ {
+        "description" : "provides data about students, subjects and their teachers",
+        "destinationId" : "1",
+        "id" : "9",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Enrollment",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJFbnJvbGxtZW50IiAiTGV2ZWwgMSIgewogICAgbW9kZWwgewogICAgICAgICMgc29mdHdhcmUgc3lzdGVtIAogICAgICAgIGVucm9sbG1lbnQgPSBzb2Z0d2FyZVN5c3RlbSAiRW5yb2xsbWVudCBTeXN0ZW0iICJQcm92aWRlcyBmdW5jdGlvbmFsaXR5IHJlbGF0ZWQgdG8gc3ViamVjdCBlbnJvbGxtZW50IHN1Y2ggYXMgZW5yb2xsIGFuZCB1bmVucm9sbCwgcmVxdWVzdCB2YWxpZGF0aW9uIGFuZCBub3RpZmljYXRpb25zLCBhbHNvIGNhbiBjaGFuZ2UgY2FwYWNpdHkgb2Ygc3ViamVjdHMgYW5kIHByb3ZpZGVzIHRoZSBhYmlsaXR5IHRvIGdldCBwbGFjZWQgaW4gcXVldWUuIgoKICAgICAgICAjIHRvaGxlIGTDoXQgxaFlZG91CiAgICAgICAgbWFpbF9zZXJ2ZXIgPSBzb2Z0d2FyZVN5c3RlbSAiTWFpbCBTZXJ2ZXIiICJFeHRlcm5hbCBzeXN0ZW0gdG8gcHJvdmlkZSBkZXNpcmVkIG1haWwgbm90aWZpY2F0aW9ucyIKCiAgICAgICAgI3N0ZF9kdGIgPSBzb2Z0d2FyZVN5c3RlbSAiU3R1ZGVudCBEYXRhYmFzZSIgIlN0dWRlbnQgRGF0YWJhc2UgcHJvdmlkZXMgYmFzaWMgaW5mb3JtYXRpb24gYWJvdXQgZW5yb2xsZWQgc3R1ZGVudHMgZm9yIGNvdXJzZSBlbnJvbGxtZW50IG1hbmFnZW1lbnQsIGFzIG5hbWUsIElELCBzdGF0dXMgb2Ygc3R1ZGVudHMuIgogICAgICAgIHNjaG9vbF9kdGIgPSBzb2Z0d2FyZVN5c3RlbSAiU2Nob29sIERhdGFiYXNlIiAiaG9sZHMgYmFzaWMgaW5mb3JtYXRpb24gYWJvdXQgZW5yb2xsZWQgc3R1ZGVudHMgZm9yIGNvdXJzZSBlbnJvbGxtZW50IG1hbmFnZW1lbnQgYW5kIGFsbCBzdWJqZWN0cyBhbmQgdGhlaXIgdGVhY2hlciIKCiAgICAgICAgIyBhY3RvcnMKICAgICAgICBzdHVkZW50ID0gcGVyc29uICJTdHVkZW50IiAic3R1ZGllcyBhdCB0aGUgc2Nob29sIGFuZCBuZWVkcyB0byBiZSBlbnJvbGxlZCBpbiBjb3Vyc2VzIiAKICAgICAgICB0ZWFjaGVyID0gcGVyc29uICJUZWFjaGVyL0F1dGhvcml0eSIgIm5lZWRzIHRvIG1hbmFnZSB0YXVnaHQgbGVjdHVyZXMsIHRoZWlyIGNhcGFjaXRpZXMgYW5kIGVucm9sbG1lbnQgcXVldWVzIgoKICAgICAgICB0ZWFjaGVyIC0+IGVucm9sbG1lbnQgInVzZXMgdGhlIHN5c3RlbSB0byBtYW5hZ2UgaGlzIGNvdXJzZXMgYW5kIHRvIGVkaXQgcXVldWVzIiAKICAgICAgICBzdHVkZW50IC0+IGVucm9sbG1lbnQgInVzZXMgdGhlIHN5c3RlbSB0byBnZXQgZW5yb2xsZWQgaW4gc3ViamVjdHMgYW5kIHZpZXcgdGhlbSIKICAgICAgICAKICAgICAgICBlbnJvbGxtZW50IC0+IG1haWxfc2VydmVyICJTZW5kcyBub3RpZmljYXRpb25zIGFuZCBpbmZvcm1hdGlvbiIKICAgICAgICAKICAgICAgICAjc3RkX2R0YiAtPiBlbnJvbGxtZW50CiAgICAgICAgc2Nob29sX2R0YiAtPiBlbnJvbGxtZW50ICJwcm92aWRlcyBkYXRhIGFib3V0IHN0dWRlbnRzLCBzdWJqZWN0cyBhbmQgdGhlaXIgdGVhY2hlcnMiCiAgICAgICAgI2Vucm9sbG1lbnQgLT4gc2Nob29sX2R0YgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1Db250ZXh0IGVucm9sbG1lbnQgIkVucm9sbG1lbnQiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQogICAgfQp9"
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "Enrollment",
+      "styles" : { },
+      "terminology" : { }
+    },
+    "systemContextViews" : [ {
+      "dimensions" : {
+        "height" : 1525,
+        "width" : 2120
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 1145,
+        "y" : 880
+      }, {
+        "id" : "2",
+        "x" : 290,
+        "y" : 845
+      }, {
+        "id" : "3",
+        "x" : 335,
+        "y" : 355
+      }, {
+        "id" : "4",
+        "x" : 1525,
+        "y" : 175
+      }, {
+        "id" : "5",
+        "x" : 935,
+        "y" : 135
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "Enrollment",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "6"
+      }, {
+        "id" : "7"
+      }, {
+        "id" : "8"
+      }, {
+        "id" : "9",
+        "vertices" : [ {
+          "x" : 883,
+          "y" : 893
+        } ]
+      } ],
+      "softwareSystemId" : "1"
+    } ]
+  }
+}
