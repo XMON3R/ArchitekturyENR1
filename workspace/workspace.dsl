@@ -3,11 +3,13 @@ workspace "Enrollment" "Level 1-3" {
     !identifiers hierarchical
 
     model {
-        # tohle dát šedou
-        mail_server = softwareSystem "Mail Server" "External system to provide desired mail notifications"
-
-        #std_dtb = softwareSystem "Student Database" "Student Database provides basic information about enrolled students for course enrollment management, as name, ID, status of students."
-        school_dtb = softwareSystem "School Database" "holds basic information about enrolled students for course enrollment management and all subjects and their teacher"
+        # external SW Systens
+        mailServer = softwareSystem "Mail Server" "External system to provide desired mail notifications" {
+            tags "External"
+        }
+        schoolDatabase = softwareSystem "School Database" "holds basic information about enrolled students for course enrollment management and all subjects and their teacher" {
+            tags "External, Database"
+        }
 
         # actors
         student = person "Student" "studies at the school and needs to be enrolled in courses" 
@@ -57,11 +59,10 @@ workspace "Enrollment" "Level 1-3" {
         teacher -> enrollment "uses the system to manage his courses and to edit queues" 
         student -> enrollment "uses the system to get enrolled in subjects and view them"
         
-        enrollment -> mail_server "Sends notifications and information"
+        enrollment -> mailServer "Sends notifications and information"
         
-        #std_dtb -> enrollment
-        school_dtb -> enrollment "provides data about students, subjects and their teachers"
-        #enrollment -> school_dtb
+        schoolDatabase -> enrollment "provides data about students, subjects and their teachers"
+        #enrollment -> schoolDatabase
 
         enrollment.dashboard -> enrollment.enrollmentProvider "sends enrollment requests"
         enrollment.dashboard -> enrollment.notificationCenter "gets notifications"
@@ -123,17 +124,20 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
+        theme default
 
         styles {
-            element "Element" {
-                color white
-            }
             element "Person" {
-                background #116611
-                shape person
+                background #234F80
+                shape Person
             }
-            element "Software System" {
-                background #2D882D
+            
+            element "External" {
+                background grey
+            }
+
+            element "Database" {
+                shape Cylinder
             }
         }
     }
