@@ -1,0 +1,12 @@
+.structurizr/*
+
+.gradle/*
+build/*
+.idea/*
+.DS_Store
+src/main/resources/build.properties
+
+docs/structurizr.properties
+docs/workspace.json
+
+workspace.json
