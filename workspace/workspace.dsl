@@ -19,9 +19,57 @@ workspace "Enrollment" "Level 1-3" {
             
             // Rasto
             dashboard = container "Dashboard" {
-                requestHandler = component "Request Handler"
-                requestHandler2 = component "Request Handler2"
-                requestHandler3 = component "Request Handler3"
+                description "User interface for students, faculty, and administrators to interact with the system."
+
+                webpage = component "Dashboard Webpage" {
+                    description "Main entry point for the Dashboard, providing a user interface and routing for different components."
+                }
+
+                enrollmentOverview = component "Enrollment Overview" {
+                    description "Fetches the student's current enrollments and pending status."
+                }
+
+                subjectCatalog = component "Subject Catalog" {
+                    description "Prepares all user's available subjects and subject details."
+                }
+
+                enrollmentActions = component "Enrollment Actions" {
+                    description "Enables students to add/remove subjects and manage preferences."
+                }
+
+                enrollementDataHandler = component "Enrollment Data Handler" {
+                    description "Handles request to the Enrollment Repository"
+                }
+
+                notifications = component "Notifications Handler" {
+                    description "Fetches notifications for enrollment deadlines and announcements."
+                }
+
+                enrolledSubjectsHandler = component "Enrolled Subjects Handler" {
+                    description "Prepares enrolled subjects."
+                }
+
+                # Webpage Component Connections
+                webpage -> enrollmentOverview "Renders enrollment overview"
+                webpage -> enrollmentActions "Provides enrollment actions UI"
+                webpage -> notifications "Renders notifications"
+                
+                # Enrollment Component Connections
+                enrollmentOverview -> subjectCatalog "Fetches subject catalog"
+                enrollmentOverview -> enrolledSubjectsHandler "Fetches enrolled subjects"
+                
+                # Enrolled Subjects Handler Component Connections
+                enrolledSubjectsHandler -> enrollementDataHandler "Fetches subjects"
+                
+                # Subjects Catalog Component Connections
+                subjectCatalog -> enrollementDataHandler "Fetches subjects"
+
+                # Enrollment Actions Component Connections
+                enrollmentActions -> enrollmentOverview "Updates enrollment status"
+
+                # Actors - todo better descriptions
+                teacher -> enrollment.dashboard.webpage "uses the system"
+                student -> enrollment.dashboard.webpage "uses the system"
             }
 
             // Honza/GameForko
@@ -56,7 +104,7 @@ workspace "Enrollment" "Level 1-3" {
 
         }
 
-        teacher -> enrollment "uses the system to manage his courses and to edit queues" 
+        teacher -> enrollment "uses the system to manage his courses and to edit queues"
         student -> enrollment "uses the system to get enrolled in subjects and view them"
         
         enrollment -> mailServer "Sends notifications and information"
@@ -75,6 +123,12 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentValidator -> enrollment.logger "logs validation result"
         enrollment.queue -> enrollment.notificationCenter "sends information about availibility"
         enrollment.enrollmentValidator -> enrollment.notificationCenter "sends validation results" 
+
+        # Dashboard
+        enrollment.dashboard.enrollmentActions -> enrollment.enrollmentProvider "Submits enrollment requests to Enrollment Provider"
+        enrollment.dashboard.notifications -> enrollment.notificationCenter "Pulls notifications from Notification Service"
+        enrollment.dashboard.enrollementDataHandler -> enrollment.enrollmentRepository "Handles data requests to Enrollment Repository"
+        
     }
 
     views {
