@@ -98,7 +98,21 @@ workspace "Enrollment" "Level 1-3" {
 
             // Vojta
             queue = container "Queue" {
+                description "Provides queue enrollments, if the capacity of the subject is full"
 
+                subjectsQueue = component "Subject queue" {
+                    description "Handles queue of students for subjects "
+                }
+
+                queueHandler = component "Queue handler" {
+                    description "Handles operations of the queue such as enqueue, dequeue or view"
+                }
+
+                Notifier = component "Notifier" {
+                    description "Trigger notification, if there is any change in the queue"
+                }
+                queueHandler -> subjectsQueue "Handles queue requests"
+                subjectsQueue -> Notifier "Informs about changes in the queue"
             }
 
             // sir Simon
@@ -232,6 +246,7 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentRepository.studentStatements -> schoolDatabase "Accesses database"
         enrollment.enrollmentRepository.enrollmentStatements -> schoolDatabase "Accesses database"
 
+<<<<<<< HEAD
         # Enrollment Provider 
         enrollment.enrollmentProvider.queueManager -> enrollment.queue "sends queue requests"
         enrollment.enrollmentProvider.enrollmentProcessor -> enrollment.EnrollmentRepository "sends enrollment data" 
@@ -242,6 +257,12 @@ workspace "Enrollment" "Level 1-3" {
         # Enrollment Validator
         enrollment.enrollmentValidator.resultLogger -> enrollment.logger "Logs validation result"
         enrollment.enrollmentValidator.notificationSender -> enrollment.notificationCenter "Sends validation results"
+=======
+        # Queue
+        enrollment.queue.Notifier -> enrollment.notificationCenter "Sends notifications about changes in the queue"
+        enrollment.enrollmentProvider -> enrollment.queue.queueHandler "Sends enqueue requests"
+        enrollment.queue.Notifier -> enrollment.enrollmentValidator "Gets enrollment validations"
+>>>>>>> refs/remotes/origin/main
     }
 
     views {
