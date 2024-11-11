@@ -246,7 +246,6 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentRepository.studentStatements -> schoolDatabase "Accesses database"
         enrollment.enrollmentRepository.enrollmentStatements -> schoolDatabase "Accesses database"
 
-<<<<<<< HEAD
         # Enrollment Provider 
         enrollment.enrollmentProvider.queueManager -> enrollment.queue "sends queue requests"
         enrollment.enrollmentProvider.enrollmentProcessor -> enrollment.EnrollmentRepository "sends enrollment data" 
@@ -257,12 +256,12 @@ workspace "Enrollment" "Level 1-3" {
         # Enrollment Validator
         enrollment.enrollmentValidator.resultLogger -> enrollment.logger "Logs validation result"
         enrollment.enrollmentValidator.notificationSender -> enrollment.notificationCenter "Sends validation results"
-=======
+
         # Queue
         enrollment.queue.Notifier -> enrollment.notificationCenter "Sends notifications about changes in the queue"
         enrollment.enrollmentProvider -> enrollment.queue.queueHandler "Sends enqueue requests"
         enrollment.queue.Notifier -> enrollment.enrollmentValidator "Gets enrollment validations"
->>>>>>> refs/remotes/origin/main
+
     }
 
     views {
