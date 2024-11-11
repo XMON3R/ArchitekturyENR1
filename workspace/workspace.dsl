@@ -117,12 +117,68 @@ workspace "Enrollment" "Level 1-3" {
 
             // sir Simon
             enrollmentProvider = container "Enrollment Provider" {
+                description "Manages enrollment and unenrollment operations for subjects"
 
+                enrollmentProcessor = component "Enrollment Processor" {
+                    description "Processes student enrollment to the subject"
+                }
+                unenrollmentProcessor = component "Unenrollment Processor" {
+                    description "Processes student unenrollment from the subject"
+                }
+                queueManager = component "Queue Manager" {
+                    description "Create queue requests for students for the selected subject if it's full"
+                }
+
+                enrollmentProcessor -> queueManager "Enqueues students if subject is full"
+                unenrollmentProcessor -> queueManager "Updates queue after unenrollment"
             }
 
             // sir Simon
-            enrollmentValidator = container "Enrollment Validator" {
+           enrollmentValidator = container "Enrollment Validator" {
+                description "Validates and processes enrollment requests"
 
+                availabilityChecker = component "Availability Checker" {
+                    description "Validates the availability of space for the selected subject"
+                }
+
+                teacherRequestValidator = component "Teacher Request Validator" {
+                    description "Validates enrollment requests from teachers"
+                }
+
+                studentPrerequisiteValidator = component "Student Prerequisite Validator" {
+                    description "Validates student prerequisites for enrollment"
+                }
+
+                credentialsValidator = component "Credentials Validator" {
+                    description "Validates student credentials for enrollment"
+                }
+
+                enrollmentCriteriaChecker = component "Enrollment Criteria Checker" {
+                    description "Checks if the enrollment request meets specific criteria"
+                }
+
+                unEnrollmentCriteriaChecker = component "Unenrollment Criteria Checker" {
+                    description "Checks if the unenrollment request meets specific criteria"
+                }
+
+                resultLogger = component "Result Logger" {
+                    description "Logs validation results"
+                }
+
+                notificationSender = component "Notification Sender" {
+                    description "Sends validation results to the Notification Center"
+                }
+
+                // Connections between components
+                enrollmentCriteriaChecker -> availabilityChecker "Checks space availability"
+                enrollmentCriteriaChecker -> teacherRequestValidator "Validates teacher requests"
+                availabilityChecker -> studentPrerequisiteValidator "Ensures prerequisites are met"
+                studentPrerequisiteValidator -> credentialsValidator "Validates credentials"
+                credentialsValidator -> resultLogger "Logs validation outcome"
+                credentialsValidator -> notificationSender "Sends validation outcome to Notification Center"
+
+                unEnrollmentCriteriaChecker -> resultLogger "Logs unenrollment validation outcome"
+                unEnrollmentCriteriaChecker -> notificationSender "Sends unenrollment validation result to Notification Center"
             }
 
             // Honza/Olcor
@@ -154,7 +210,7 @@ workspace "Enrollment" "Level 1-3" {
 
             // Maty
             logger = container "Logger" {
-
+            
             }
 
         }
@@ -190,10 +246,22 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentRepository.studentStatements -> schoolDatabase "Accesses database"
         enrollment.enrollmentRepository.enrollmentStatements -> schoolDatabase "Accesses database"
 
+        # Enrollment Provider 
+        enrollment.enrollmentProvider.queueManager -> enrollment.queue "sends queue requests"
+        enrollment.enrollmentProvider.enrollmentProcessor -> enrollment.EnrollmentRepository "sends enrollment data" 
+        enrollment.enrollmentProvider.unenrollmentProcessor -> enrollment.EnrollmentRepository "sends enrollment data" 
+        enrollment.enrollmentProvider.enrollmentProcessor -> enrollment.EnrollmentValidator "sends enrollment data" 
+        enrollment.enrollmentProvider.unenrollmentProcessor -> enrollment.EnrollmentValidator "sends enrollment data" 
+
+        # Enrollment Validator
+        enrollment.enrollmentValidator.resultLogger -> enrollment.logger "Logs validation result"
+        enrollment.enrollmentValidator.notificationSender -> enrollment.notificationCenter "Sends validation results"
+
         # Queue
         enrollment.queue.Notifier -> enrollment.notificationCenter "Sends notifications about changes in the queue"
         enrollment.enrollmentProvider -> enrollment.queue.queueHandler "Sends enqueue requests"
         enrollment.queue.Notifier -> enrollment.enrollmentValidator "Gets enrollment validations"
+
     }
 
     views {
