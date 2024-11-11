@@ -94,7 +94,29 @@ workspace "Enrollment" "Level 1-3" {
 
             // Honza/Olcor
             enrollmentRepository = container "Enrollment Repository" {
+                description "Provides abstraction for accessing database."
 
+                subjectStatements = component "Subject Statements" {
+                    description "Provides all CRUD operations for the subject table in database"
+                }
+
+                studentStatements = component "Student Statements" {
+                    description "Provides all CRUD operations for the student table in database"
+                }
+
+                enrollmentStatements = component "Enrollment Statements" {
+                    description "Provides all CRUD operations for the student-subject enrollment relation"
+                }
+
+                databaseLogger = component "Database Logger" {
+                    description "Logs accesses to the database"    
+                }
+
+                enrollmentStatements -> subjectStatements "Utilizes CRUD operations"
+                enrollmentStatements -> studentStatements "Utilizes CRUD operations"
+                subjectStatements -> databaseLogger "Logs database operations"
+                studentStatements -> databaseLogger "Logs database operations"
+                enrollmentStatements -> databaseLogger "Logs database operations"
             }
 
             // Maty
@@ -129,6 +151,11 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.dashboard.notifications -> enrollment.notificationCenter "Pulls notifications from Notification Service"
         enrollment.dashboard.enrollementDataHandler -> enrollment.enrollmentRepository "Handles data requests to Enrollment Repository"
         
+        # Enrollment Repository
+        enrollment.enrollmentRepository.databaseLogger -> enrollment.logger "Logs accesses to the database"
+        enrollment.enrollmentRepository.subjectStatements -> schoolDatabase "Accesses database"
+        enrollment.enrollmentRepository.studentStatements -> schoolDatabase "Accesses database"
+        enrollment.enrollmentRepository.enrollmentStatements -> schoolDatabase "Accesses database"
     }
 
     views {
