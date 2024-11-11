@@ -74,7 +74,26 @@ workspace "Enrollment" "Level 1-3" {
 
             // Honza/GameForko
             notificationCenter = container "Notification Center" {
-                testA = component "pepega"
+                
+                description "Manages notifications for students and teachers/authority about events via external Mail Server"
+
+                notificationManager = component "Notification Manager" {
+                    description "Manages filtering sending notifications based on notification type request"
+                }
+
+                teacherNotification = component "Teacher Notification" {
+                    description "Notifies teachers about the result of the enrollment validation"
+                }
+
+                studentNotification = component "Student Notification" {
+                    description "Notifies students about the results of their enrollment requests"
+                }
+
+                notificationManager -> teacherNotification "Handle teachers notifications"
+                notificationManager -> studentNotification "Handle students notifications"
+                studentNotification -> mailServer "Sends email notifications"
+                teacherNotification -> mailServer "Sends email notifications"
+
             }
 
             // Vojta
