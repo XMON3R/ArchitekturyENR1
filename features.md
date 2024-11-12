@@ -2,6 +2,7 @@
 # Enrollment System
 
 ## Core features and responsibilities
+System used for management of enrollment and subjects (both for students and teachers/authorities).
 
 --------------------------------------------------------------------------------------------------------------------
 
