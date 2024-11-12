@@ -68,8 +68,8 @@ workspace "Enrollment" "Level 1-3" {
                 enrollmentActions -> enrollmentOverview "Updates enrollment status"
 
                 # Actors - todo better descriptions
-                teacher -> enrollment.dashboard.webpage "uses the system"
-                student -> enrollment.dashboard.webpage "uses the system"
+                teacher -> enrollment.dashboard.webpage "uses the system to get enrolled in subjects and view them"
+                student -> enrollment.dashboard.webpage "uses the system to get enrolled in subjects and view them"
             }
 
             // Honza/GameForko
@@ -227,8 +227,9 @@ workspace "Enrollment" "Level 1-3" {
 
         }
 
-        teacher -> enrollment "uses the system to manage his courses and to edit queues"
-        student -> enrollment "uses the system to get enrolled in subjects and view them"
+        # duplicates
+        #teacher -> enrollment "uses the system to manage his courses and to edit queues"
+        #student -> enrollment "uses the system to get enrolled in subjects and view them"
         
         enrollment -> mailServer "Sends notifications and information"
         
@@ -253,10 +254,14 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.dashboard.enrollementDataHandler -> enrollment.enrollmentRepository "Handles data requests to Enrollment Repository"
         
         # Enrollment Repository
-        enrollment.enrollmentRepository.databaseLogger -> enrollment.logger.entryLogger "Logs accesses to the database"
+        enrollment.enrollmentRepository.databaseLogger -> enrollment.logger.entryLogger "Logs enrollment entry"
         enrollment.enrollmentRepository.subjectStatements -> schoolDatabase "Accesses database"
         enrollment.enrollmentRepository.studentStatements -> schoolDatabase "Accesses database"
         enrollment.enrollmentRepository.enrollmentStatements -> schoolDatabase "Accesses database"
+
+        enrollment.dashboard -> enrollment.enrollmentRepository.subjectStatements "gets available subjects"
+        enrollment.enrollmentProvider -> enrollment.enrollmentRepository.enrollmentStatements "sends enrollment data"
+
 
         # Enrollment Provider 
         enrollment.enrollmentProvider.queueManager -> enrollment.queue "sends queue requests"
@@ -265,15 +270,51 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentProvider.enrollmentProcessor -> enrollment.EnrollmentValidator "sends enrollment data" 
         enrollment.enrollmentProvider.unenrollmentProcessor -> enrollment.EnrollmentValidator "sends enrollment data" 
 
+        enrollment.dashboard -> enrollment.enrollmentProvider.enrollmentProcessor "Submits enrollment requests"
+        enrollment.dashboard -> enrollment.enrollmentProvider.unenrollmentProcessor "Submits enrollment requests"
+
         # Enrollment Validator
         enrollment.enrollmentValidator.resultLogger -> enrollment.logger.resultLogger "Logs validation result"
         enrollment.enrollmentValidator.notificationSender -> enrollment.notificationCenter "Sends validation results"
+
+        enrollment.enrollmentProvider -> enrollment.enrollmentValidator.enrollmentCriteriaChecker "sends enrollment data"
+        enrollment.queue -> enrollment.enrollmentValidator.enrollmentCriteriaChecker "gets enrollment validation"
 
         # Queue
         enrollment.queue.Notifier -> enrollment.notificationCenter "Sends notifications about changes in the queue"
         enrollment.enrollmentProvider -> enrollment.queue.queueHandler "Sends enqueue requests"
         enrollment.queue.Notifier -> enrollment.enrollmentValidator "Gets enrollment validations"
 
+        # Notification center
+        enrollment.dashboard -> enrollment.notificationCenter.notificationManager "gets notifications"
+        enrollment.enrollmentValidator -> enrollment.notificationCenter.notificationManager "sends validation results"
+        enrollment.queue -> enrollment.notificationCenter.notificationManager "sends information about availability"
+
+        deploymentEnvironment "Live"     {
+            deploymentNode "User's web browser" "" "" {
+                dashboardHTMLInstance = containerInstance enrollment.dashboard
+            }
+            deploymentNode "Application Server" "" "Ubuntu 18.04 LTS"   {
+                deploymentNode "Web server" "" "Apache Tomcat 10.1.15"  {
+                    //adminAppInstance = containerInstance adminApp
+                    providerInstance = containerInstance enrollment.enrollmentProvider
+                    //healthStatusManagerInstance = containerInstance healthStatusManager
+                }
+                deploymentNode "Log storage" "" "Elasticsearch 8.10.4"  {
+                    logDBInstance = containerInstance enrollment.logger
+                }
+            }
+            deploymentNode "Database Server" "" "Ubuntu 18.04 LTS"   {
+                //deploymentNode "Relational DB server" "" "Oracle 19.1.0" {
+                    //healthStatusDBInstance = containerInstance healthStatusDB
+                    //patientDBInstance = containerInstance patientDB
+                    //subjectDBInstance = containerInstance schoolDatabase
+                //}
+                
+            }
+           
+        }
+    
     }
 
     views {
@@ -322,6 +363,19 @@ workspace "Enrollment" "Level 1-3" {
             include *
             autolayout lr
         }
+
+        deployment enrollment "Live" "Live_Deployment"   {
+            include *
+            autolayout lr
+        }
+
+        #feature 1 DIAGRAM
+        /*
+        dynamic enrollment.dashboard "Test" {
+            description "The sequence of interactions for enrolling in a subject."
+
+            student -> enrollment.dashboard.subjectCatalog "1. View available subjects"
+        }*/
 
         theme default
 
