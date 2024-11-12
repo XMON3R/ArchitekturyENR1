@@ -294,27 +294,23 @@ workspace "Enrollment" "Level 1-3" {
             deploymentNode "User's web browser" "" "" {
                 dashboardHTMLInstance = containerInstance enrollment.dashboard
             }
+
             deploymentNode "Application Server" "" "Ubuntu 18.04 LTS"   {
                 deploymentNode "Web server" "" "Apache Tomcat 10.1.15"  {
-                    //adminAppInstance = containerInstance adminApp
                     providerInstance = containerInstance enrollment.enrollmentProvider
-                    //healthStatusManagerInstance = containerInstance healthStatusManager
-                }
-                deploymentNode "Log storage" "" "Elasticsearch 8.10.4"  {
-                    logDBInstance = containerInstance enrollment.logger
-                }
+                    notificationCenterInstance = containerInstance enrollment.NotificationCenter
+                    repositoryInstance = containerInstance enrollment.enrollmentRepository
+                }               
             }
-            deploymentNode "Database Server" "" "Ubuntu 18.04 LTS"   {
-                //deploymentNode "Relational DB server" "" "Oracle 19.1.0" {
-                    //healthStatusDBInstance = containerInstance healthStatusDB
-                    //patientDBInstance = containerInstance patientDB
-                    //subjectDBInstance = containerInstance schoolDatabase
-                //}
-                
+
+            deploymentNode "Validator Server" "" "Ubuntu 18.04 LTS"   {
+                validatorInstance = containerInstance enrollment.enrollmentValidator
             }
-           
+
+            deploymentNode "Logger Server" "" "Ubuntu 18.04 LTS" {
+                 logDBInstance = containerInstance enrollment.logger
+            }
         }
-    
     }
 
     views {
