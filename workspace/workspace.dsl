@@ -359,12 +359,21 @@ workspace "Enrollment" "Level 1-3" {
         }
 
         #feature 1 DIAGRAM
-        /*
-        dynamic enrollment.dashboard "Test" {
+        
+        dynamic enrollment "Feature1" {
             description "The sequence of interactions for enrolling in a subject."
 
-            student -> enrollment.dashboard.subjectCatalog "1. View available subjects"
-        }*/
+            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
+            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation"
+            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validaiton result"
+            enrollment.notificationCenter -> mailServer "Sends notifications of validaiton result"
+
+            autolayout lr
+        }
 
         theme default
 
