@@ -226,18 +226,12 @@ workspace "Enrollment" "Level 1-3" {
 
 
         }
-
-        # duplicates
-        #teacher -> enrollment "uses the system to manage his courses and to edit queues"
-        #student -> enrollment "uses the system to get enrolled in subjects and view them"
         
         enrollment -> mailServer "Sends notifications and information"
         
         schoolDatabase -> enrollment "provides data about students, subjects and their teachers"
-        #enrollment -> schoolDatabase
 
         enrollment.dashboard -> enrollment.enrollmentProvider "sends enrollment requests"
-        enrollment.dashboard -> enrollment.notificationCenter "gets notifications"
         enrollment.dashboard -> enrollment.enrollmentRepository "gets available subjects"
         enrollment.enrollmentRepository -> enrollment.logger "logs enrollment entry"
         enrollment.enrollmentProvider -> enrollment.enrollmentRepository "sends enrollment data"
@@ -250,7 +244,6 @@ workspace "Enrollment" "Level 1-3" {
 
         # Dashboard
         enrollment.dashboard.enrollmentActions -> enrollment.enrollmentProvider "Submits enrollment requests to Enrollment Provider"
-        enrollment.dashboard.notifications -> enrollment.notificationCenter "Pulls notifications from Notification Service"
         enrollment.dashboard.enrollementDataHandler -> enrollment.enrollmentRepository "Handles data requests to Enrollment Repository"
         
         # Enrollment Repository
@@ -286,7 +279,7 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.queue.Notifier -> enrollment.enrollmentValidator "Gets enrollment validations"
 
         # Notification center
-        enrollment.dashboard -> enrollment.notificationCenter.notificationManager "gets notifications"
+        enrollment.notificationCenter.notificationManager -> enrollment.dashboard.notifications "sends notifications"
         enrollment.enrollmentValidator -> enrollment.notificationCenter.notificationManager "sends validation results"
         enrollment.queue -> enrollment.notificationCenter.notificationManager "sends information about availability"
 
