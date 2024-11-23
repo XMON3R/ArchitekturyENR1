@@ -390,6 +390,21 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
+        #feature logger
+        dynamic enrollment.logger "Feature_Logger" {
+            description "The sequence of interactions for saving a log"
+
+            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
+            enrollment.enrollmentRepository -> enrollment.logger.entryLogger "Logs database access"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
+            enrollment.enrollmentValidator -> enrollment.logger.resultLogger "Logs validation result"
+
+            autolayout lr
+        }
+
         theme default
 
         styles {
