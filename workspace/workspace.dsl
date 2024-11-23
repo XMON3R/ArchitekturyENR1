@@ -405,6 +405,19 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
+
+        dynamic enrollment.enrollmentRepository "Feature_Repository" {
+            description "The sequence of interactions for accession the database."
+
+            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
+            enrollment.dashboard -> enrollment.enrollmentRepository.subjectStatements "Requests available subjects"
+            enrollment.enrollmentRepository.subjectStatements -> schoolDatabase "Accesses database for all available subjects"
+            enrollment.enrollmentRepository.subjectStatements -> enrollment.dashboard "Sends all available subjects"
+
+            autolayout lr
+        }
+
+
         theme default
 
         styles {
