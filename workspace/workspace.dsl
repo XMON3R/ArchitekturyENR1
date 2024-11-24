@@ -224,7 +224,7 @@ workspace "Enrollment" "Level 1-3" {
             entryLogger -> logFile "Saves logs to the file"
             }
 
-
+            !docs docs
         }
         
         enrollment -> mailServer "Sends notifications and information"
@@ -379,23 +379,19 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
-        #DOPSAT 
         #feature 2 DIAGRAM
-        dynamic enrollment "Unenrolling_in_subjects" {
-            description "The sequence of interactions for enrolling in a subject."
+        dynamic enrollment "Unenrolling_from_subjects" {
+            description "The sequence of interactions for unenrolling from a subject."
 
-            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
-            enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
-            enrollment.enrollmentRepository -> schoolDatabase "Get student's classes"
-            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
-            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
-            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
+            student -> enrollment.dashboard "Student opens dashboard website ands views his enrolled subjects"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's unenrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends unenrollment request for validation"
             enrollment.enrollmentValidator -> enrollment.enrollmentProvider "Sends result of validation"
-            enrollment.enrollmentProvider -> enrollment.enrollmentRepository "Sends request to write data about new enrollment"
-            enrollment.enrollmentRepository -> schoolDatabase "Write enrolling data"
+            enrollment.enrollmentProvider -> enrollment.enrollmentRepository "Sends request to write data the unenrollment"
+            enrollment.enrollmentRepository -> schoolDatabase "Write unenrolling data"
             enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation" 
-            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validaiton result"
-            enrollment.notificationCenter -> mailServer "Sends notifications of validaiton result"
+            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validation result"
+            enrollment.notificationCenter -> mailServer "Sends notifications of validation result"
 
             autolayout lr
         }
