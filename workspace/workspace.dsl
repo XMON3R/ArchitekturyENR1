@@ -417,6 +417,20 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
+        dynamic enrollment "Feature_Teacher_Enrollment" {
+            description "The sequence of interactions for enrolling in a subject."
+
+            teacher -> enrollment.dashboard "Teacher opens dashboard website and choose enrollment module, which displays his classes"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests teachers classes"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back teachers classes"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends teacher's enrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
+            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation"
+            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validation result"
+            enrollment.notificationCenter -> mailServer "Sends notifications of validation result"
+
+            autolayout lr
+        }
 
         theme default
 
