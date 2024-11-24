@@ -269,6 +269,7 @@ workspace "Enrollment" "Level 1-3" {
         # Enrollment Validator
         enrollment.enrollmentValidator.resultLogger -> enrollment.logger.resultLogger "Logs validation result"
         enrollment.enrollmentValidator.notificationSender -> enrollment.notificationCenter "Sends validation results"
+        enrollment.enrollmentValidator -> enrollment.enrollmentProvider.enrollmentProcessor "sends validation results"
 
         enrollment.enrollmentProvider -> enrollment.enrollmentValidator.enrollmentCriteriaChecker "sends enrollment data"
         enrollment.queue -> enrollment.enrollmentValidator.enrollmentCriteriaChecker "gets enrollment validation"
@@ -359,24 +360,84 @@ workspace "Enrollment" "Level 1-3" {
         }
 
         #feature 1 DIAGRAM
-        
-        dynamic enrollment "Feature1" {
+        dynamic enrollment "Enrolling_in_subjects" {
             description "The sequence of interactions for enrolling in a subject."
 
             student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
             enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
+            enrollment.enrollmentRepository -> schoolDatabase "Get student's classes"
             enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
             enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
             enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
-            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation"
+            enrollment.enrollmentValidator -> enrollment.enrollmentProvider "Sends result of validation"
+            enrollment.enrollmentProvider -> enrollment.enrollmentRepository "Sends request to write data about new enrollment"
+            enrollment.enrollmentRepository -> schoolDatabase "Write enrolling data"
+            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation" 
             enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validaiton result"
             enrollment.notificationCenter -> mailServer "Sends notifications of validaiton result"
 
             autolayout lr
         }
 
+        #DOPSAT 
+        #feature 2 DIAGRAM
+        dynamic enrollment "Unenrolling_in_subjects" {
+            description "The sequence of interactions for enrolling in a subject."
+
+            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
+            enrollment.enrollmentRepository -> schoolDatabase "Get student's classes"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
+            enrollment.enrollmentValidator -> enrollment.enrollmentProvider "Sends result of validation"
+            enrollment.enrollmentProvider -> enrollment.enrollmentRepository "Sends request to write data about new enrollment"
+            enrollment.enrollmentRepository -> schoolDatabase "Write enrolling data"
+            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation" 
+            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validaiton result"
+            enrollment.notificationCenter -> mailServer "Sends notifications of validaiton result"
+
+            autolayout lr
+        }
+
+
+        #feature 3 DIAGRAM
+        dynamic enrollment "Viewing_enrolled_subjects" {
+            description "The sequence of interactions for student to view their enrolled subjects."
+
+            student -> enrollment.dashboard "Student opens the dashboard and navigates to the enrollment module"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests enrolled subjects that enrolled by the student"
+            enrollment.enrollmentRepository -> schoolDatabase "Accesses database for enrolled subjects"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back enrolled subjects"
+            enrollment.dashboard -> student "Displays enrolled subjects"
+
+            autolayout lr
+        }
+        
+
+        #feature 4 DIAGRAM
+        dynamic enrollment "Feature_Teacher_Enrollment" {
+            description "The sequence of interactions for enrolling in a subject."
+
+            teacher -> enrollment.dashboard "Teacher opens dashboard website and choose enrollment module, which displays his classes"
+            enrollment.dashboard -> enrollment.enrollmentRepository "Requests teachers classes"
+            enrollment.enrollmentRepository -> schoolDatabase "Get teachers classes"
+            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back teachers classes"
+            enrollment.dashboard -> enrollment.enrollmentProvider "Sends teacher's enrollment request"
+            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"            
+            enrollment.enrollmentValidator -> enrollment.enrollmentProvider "Sends result of validation"
+            enrollment.enrollmentProvider -> enrollment.enrollmentRepository "Sends request to write data about new enrollment"
+            enrollment.enrollmentRepository -> schoolDatabase "Write subject data"
+            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation"
+            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validation result"
+            enrollment.enrollmentValidator -> enrollment.enrollmentProvider "Sends result of validation"
+
+            autolayout lr
+        }
+
+    
+        #feature 5 DIAGRAM
         dynamic enrollment "Feature-Notification" {
-            
             description "The sequence of interactions for notification."
 
             student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
@@ -390,44 +451,15 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
-        #feature logger
-        dynamic enrollment.logger "Feature_Logger" {
-            description "The sequence of interactions for saving a log"
+        #feature 6 DIAGRAM 
+        dynamic enrollment.enrollmentRepository "Feature-viewing-subjects-available-for-enrollement" {
+            description "The sequence of interactions for displaying available subjects to the student on screen."
 
-            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
-            enrollment.dashboard -> enrollment.enrollmentRepository "Requests available subjects"
-            enrollment.enrollmentRepository -> enrollment.logger.entryLogger "Logs database access"
-            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back available subjects"
-            enrollment.dashboard -> enrollment.enrollmentProvider "Sends student's enrollment request"
-            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
-            enrollment.enrollmentValidator -> enrollment.logger.resultLogger "Logs validation result"
-
-            autolayout lr
-        }
-
-
-        dynamic enrollment.enrollmentRepository "Feature_Repository" {
-            description "The sequence of interactions for accession the database."
-
-            student -> enrollment.dashboard "Student opens dashboard website & views all available subjects"
+            student -> enrollment.dashboard "Student opens dashboard website and views all available subjects for enrollment"
             enrollment.dashboard -> enrollment.enrollmentRepository.subjectStatements "Requests available subjects"
             enrollment.enrollmentRepository.subjectStatements -> schoolDatabase "Accesses database for all available subjects"
             enrollment.enrollmentRepository.subjectStatements -> enrollment.dashboard "Sends all available subjects"
-
-            autolayout lr
-        }
-
-        dynamic enrollment "Feature_Teacher_Enrollment" {
-            description "The sequence of interactions for enrolling in a subject."
-
-            teacher -> enrollment.dashboard "Teacher opens dashboard website and choose enrollment module, which displays his classes"
-            enrollment.dashboard -> enrollment.enrollmentRepository "Requests teachers classes"
-            enrollment.enrollmentRepository -> enrollment.dashboard "Sends back teachers classes"
-            enrollment.dashboard -> enrollment.enrollmentProvider "Sends teacher's enrollment request"
-            enrollment.enrollmentProvider -> enrollment.enrollmentValidator "Sends enrollment request for validation"
-            enrollment.enrollmentValidator -> enrollment.notificationCenter "Sends result of validation"
-            enrollment.notificationCenter -> enrollment.dashboard "Sends notifications of validation result"
-            enrollment.notificationCenter -> mailServer "Sends notifications of validation result"
+            enrollment.dashboard -> student "Displays available subjects"
 
             autolayout lr
         }
