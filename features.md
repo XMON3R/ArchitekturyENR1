@@ -6,7 +6,7 @@ System used for management of enrollment and subjects (both for students and tea
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: Enrolling to a new subject
+### Feature: 1. Enrolling to a new subject (Rasťo, hotové)
 
 As a student, I want to enroll to a subject, because I must be enrolled to a subject to be able to get credits for it.
 
@@ -43,7 +43,7 @@ As a student, I want to enroll to a subject, because I must be enrolled to a sub
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: Unenrolling from enrolled subject
+### Feature: 2. Unenrolling from enrolled subject (Honza R.)
 
 As a student I want to unenroll from a subject, because I want to be unenrolled from a subject.
 
@@ -77,7 +77,7 @@ As a student I want to unenroll from a subject, because I want to be unenrolled 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: Viewing enrolled subjects 
+### Feature: 3. Viewing enrolled subjects (Maty)
 As a student I want to view subjects I am enrolled to, because I want to know them. 
 
 #### Feature breakdown
@@ -94,7 +94,7 @@ As a student I want to view subjects I am enrolled to, because I want to know th
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: Enrolling a student to a teacher's subject
+### Feature: 4. Enrolling a student to a teacher's subject (Vojta)
 
 As a teacher, I want to be able to enroll a student to my subject, because for some reason the student couldn't do that himself or from the queue.
 
@@ -119,7 +119,7 @@ As a teacher, I want to be able to enroll a student to my subject, because for s
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: Notification of Invalid Enrollment
+### Feature: 5. Notification of Invalid Enrollment (Šimon)
 
 As a student, I want to be notified if I am unable to enroll in a subject, so that I only enroll in valid subjects.
 
@@ -160,7 +160,7 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 * Notify the student promptly of the outcome of the request.
 
 --------------------------------------------------------------------------------------------------------------------
-### Feature: Viewing subjects available for enrollment
+### Feature: 6. Viewing subjects available for enrollment (Honza Č.)
 
 #### Feature breakdown
 1. Student opens the dashboard and navigates to the Enrollment module.
