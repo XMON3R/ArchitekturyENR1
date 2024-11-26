@@ -4,63 +4,89 @@
 | :---: |
 | [Overview](#overview) |
 | [Containers](#containers) |
-| [Features](#features) |
+| [Features](#core-features-and-responsibilities) |
 | [Deployment diagrams](#deployment-diagrams) | 
 
 ## Overview
 
 The enrollment module is responsible for handling all requests for enrollment to subjects and unenrollment from them. 
-There are two main actors, first is a student, who wants to (un)enroll (from)/to subjects, and a teacher/authority, who has higher rights and privileges then students and wants to manage his courses. 
+There are two main actors, first is a student, who wants to (un)enroll (from)/to subjects. The second one is teacher/authority, who has higher rights/privileges then students and wants to manage his courses. 
 The module communicates with external database system, where are all needed data stored, and also with external mail server, which handles sending notification via email.
 ![](embed:EnrollmentSystem)
 
-
 ## Containers
 
-Funtionality of the enrollment module is split between 7 containers such as [Dashboard](#dashboard), [Enrollment Provider](#enrollment-provider), [Queue](#queue), [Enrollment Validator](#enrollment-validator), [Logger](#logger), [Enrollment repository](#enrollment-repository) and [Notification center](#notification-center).
+Funtionality of the enrollment module is split between 7 containers such as [Dashboard](#dashboard), [Enrollment Provider](#enrollment-provider), [Queue](#queue), [Enrollment Validator](#enrollment-validator), [Logger](#logger), [Enrollment repository](#enrollment-repository) and [Notification center](#notification-center). 
 
 ![](embed:Enrollment)
+Below you can read more about the functionality of each container.
 
-TODO: Maybe add responsibilities for every container here 
 ### Dashboard
-TODO: Description 
+The dashboard provides the main way of communication between the user and the system, becaue it encapsulate all the needed functionality for them.
 ![](embed:Dashboard)
 
+#### Dashboard responsibilities
+ - Display information of available subjects for the student
+ - Display all enrolled subjects for the student
+ - Display selector to choos a specific subject for unenrollment
+
 ### Enrollment Provider
-TODO: Description 
+TODO: Description
 ![](embed:EnrollmentProvider)
 
+#### Provider responsibilites
+- Enroll to subject
+- Unenroll from subject 
+
 ### Queue
-TODO: Description
+The queue container is responsible of all the actions with enrollment requests, if the course capacity is already full. It tracks students in the queue and handles the actual enrollment if the capacity of the course is opened up. Also is sends reguest to notification manager, if needed to infrom the student of the change in the enrollment.
 ![](embed:Queue)
 
+#### Queue resposibilities 
+- Offer to place the student into an enrollemnt queue for the selected subject
+- Place the student to the enrollment queue for the selected subject
+- Enroll the student to the subject if the capacity is opened up
+
 ### Enrollment validator
-TODO: Description 
+Enrollment validator has resposibility for validation of enrollment reaguest such as prerequities, subject capacity, enrollment priority mode, etc.
 ![](embed:EnrollmentValidator)
 
+#### Validator responsibilites 
+ - Validate students credentials
+ - Validate students prerequisities
+ - Check if the unenrollment request meets specific criteria
+ - Validate capacity of the selected subject
+
 ### Logger
-TODO: Description 
+The main funtionality of this container is to store all actions happenning across the system with enrollment and unenrollment reguests, it stores all the logs in multiple log files. 
 ![](embed:Logger)
 
+#### Logger responsibilites
+ - Log all acctions happening in the module
+
 ### Enrollment repository
-TODO: Description
+This module is very important, because it handles all communication with the external database server such as writing data, getting data, filtering data, etc. It provides abstraction for other containers of the module for easier commutiona with database.
 ![](embed:EnrollmentRepository)
 
+#### Repository responsibilities
+ - Add subject to the students list of enrolled subjects
+ - Remove the subject from the students list of enrolled subjects
+ - Get available subjects for the student
+
 ### Notification center
-TODO: Description 
+The notification center has the main responsibility of sending notification to the user, if needed, for example if the student was succesfully enrolled to the subject.
+There two types of notification, the first one is the email notification, which is handled via the external mail server. The second type is "frontend" notification, which occurs on the dashboard page.
 ![](embed:NotificationCenter)
 
-## Features
+#### Notifier responsibilites
+- Notify student about the enrollment request result
+- Inform teacher about the result of the request
 
 ## Core features and responsibilities
-System used for management of enrollment and subjects (both for students and teachers/authorities).
-
-Made by: ENR1 2024
-
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: 1. Enrolling to a new subject (Rasťo, hotové)
+### Enrolling to a new subject
 
 As a student, I want to enroll to a subject, because I must be enrolled to a subject to be able to get credits for it.
 
@@ -95,12 +121,11 @@ As a student, I want to enroll to a subject, because I must be enrolled to a sub
 * Ensure that the student is correctly enrolled to the selected subject
 * Ensure that all actions done are logged
 
-#### FEATURE DIAGRAM
 ![](embed:Enrolling_in_subjects)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: 2. Unenrolling from enrolled subject (Šimon)
+### Unenrolling from enrolled subject
 
 As a student I want to unenroll from a subject, because I want to be unenrolled from a subject.
 
@@ -132,12 +157,12 @@ As a student I want to unenroll from a subject, because I want to be unenrolled 
 ##### Notification responsibilities
 * Notify the student if request was success or not.
 
-#### AS FEATURE DIAGRAM
+
 ![](embed:Unenrolling_from_subjects)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: 3. Viewing enrolled subjects
+### Viewing enrolled subjects
 As a student I want to view subjects I am enrolled to, because I want to know them. 
 
 #### Feature breakdown
@@ -152,12 +177,11 @@ As a student I want to view subjects I am enrolled to, because I want to know th
 ##### Subject viewing responsibilities
 * Display information of all enrolled subjects for the student.
 
-#### AS FEATURE DIAGRAM
 ![](embed:Viewing_enrolled_subjects)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: 4. Enrolling a student to a teacher's subject
+### Enrolling a student to a teacher's subject
 
 As a teacher, I want to be able to enroll a student to my subject, because for some reason the student couldn't do that himself or from the queue.
 
@@ -178,14 +202,13 @@ As a teacher, I want to be able to enroll a student to my subject, because for s
 * Inform teacher of any issues that occured during validation
 
 #### Notification responsibilities
-* Send email notifcation to the student with the confirmation message and details about the enrollment.
+* Send email notification to the student with the confirmation message and details about the enrollment.
 
-#### FEATURE DIAGRAM
 ![](embed:Feature_Teacher_Enrollment)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Feature: 5. Notification of Invalid Enrollment
+### Notification of Invalid Enrollment
 As a student, I want to be notified if I am unable to enroll in a subject, so that I only enroll in valid subjects.
 
 #### Feature Breakdown
@@ -224,10 +247,11 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 * Log the enrollment actions for tracking and auditing.
 * Notify the student promptly of the outcome of the request.
 
-#### FEATURE DIAGRAM
 ![](embed:Feature-Notification)
+
 --------------------------------------------------------------------------------------------------------------------
-### Feature: 6. Viewing subjects available for enrollment
+
+### Viewing subjects available for enrollment
 
 #### Feature breakdown
 1. Student opens the dashboard and navigates to the Enrollment module.
@@ -236,7 +260,7 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 4. Student filters the subjects by availibility for enrollment.
 5. System displays subjects that are only available for enrollment.
 
-### Responsibilities
+#### Responsibilities
 
 ##### Subject viewing responsibilities
 * Display information of all subjects for the student.
@@ -244,7 +268,6 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 ##### Filtering responsibility
 * Filter available subjects for the student.
 
-#### FEATURE DIAGRAM
 ![](embed:Feature-viewing-subjects-available-for-enrollement)
 
 --------------------------------------------------------------------------------------------------------------------
