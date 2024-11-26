@@ -287,5 +287,5 @@ Last but not least is the queue, with also its own server, because it needs to h
 ![](embed:ProductionDiagram)
 
 #### Development diagram
-TODO: Description 
-TODO: Create the diagram
+
+![](embed:DevelopmentDiagram)

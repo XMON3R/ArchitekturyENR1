@@ -284,7 +284,7 @@ workspace "Enrollment" "Level 1-3" {
         enrollment.enrollmentValidator -> enrollment.notificationCenter.notificationManager "sends validation results"
         enrollment.queue -> enrollment.notificationCenter.notificationManager "sends information about availability"
 
-        deploymentEnvironment "Live"     {
+        deploymentEnvironment "Production"     {
             deploymentNode "User's web browser" "" "" {
                 dashboardHTMLInstance = containerInstance enrollment.dashboard
             }
@@ -297,12 +297,47 @@ workspace "Enrollment" "Level 1-3" {
                 }               
             }
 
+            deploymentNode "Queue Server" "" "Ubuntu 18.04 LTS" {
+                queueInstance = containerInstance enrollment.queue
+            }
+
             deploymentNode "Validator Server" "" "Ubuntu 18.04 LTS"   {
                 validatorInstance = containerInstance enrollment.enrollmentValidator
             }
 
             deploymentNode "Logger Server" "" "Ubuntu 18.04 LTS" {
                  logDBInstance = containerInstance enrollment.logger
+            }
+        }
+        deploymentEnvironment "Development" {
+            deploymentNode "Developers laptop" {
+                deploymentNode "Web browser" "" "Chrome, Firefox, Edge, ..." {
+                    dashboardHTMLInstance = containerInstance enrollment.dashboard
+                }
+
+                deploymentNode "Docker Container - Web server" {
+                    deploymentNode "Apache Tomcat" "" "Apache Tomcat 10.1.15"  {
+                        providerInstance = containerInstance enrollment.enrollmentProvider
+                        repositoryInstance = containerInstance enrollment.enrollmentRepository
+                    }         
+                }
+
+                deploymentNode "Docker Container - Notifier server" { 
+                    notificationCenterInstance = containerInstance enrollment.NotificationCenter
+
+                }
+
+                deploymentNode "Docker Container - Logger server " {
+                    logDBInstance = containerInstance enrollment.logger
+                }
+
+                deploymentNode "Docker Container - Validator server " {
+                    validatorInstance = containerInstance enrollment.enrollmentValidator
+                }
+
+                deploymentNode "Docker Container - Queue server" { 
+                    queueInstance = containerInstance enrollment.queue
+                }
             }
         }
     }
@@ -354,7 +389,12 @@ workspace "Enrollment" "Level 1-3" {
             autolayout lr
         }
 
-        deployment enrollment "Live" "Live_Deployment"   {
+        deployment enrollment "Production" "ProductionDiagram"   {
+            include *
+            autolayout lr
+        }
+
+        deployment enrollment "Development" "DevelopmentDiagram"   {
             include *
             autolayout lr
         }
