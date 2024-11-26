@@ -273,11 +273,19 @@ As a student, I want to be notified if I am unable to enroll in a subject, so th
 --------------------------------------------------------------------------------------------------------------------
 
 ## Deployment diagrams
-Here is the oveview of production and development deployment diagrams
-#### Production 
-TODO: Description 
-![](embed:Live_Deployment)
+Here is the overview of production and development deployment diagrams, which explains, how the enrollment module will be deployed in both scenarios.
 
-#### Development
+### Production diagram
+The Dashboard will be on the users web browser.
+
+The Enrollment Validator will be deployed on his own Validator server, because its needs to hadle many operations with validation proccesses.
+Logger container will be also deployed on his own Logger server to handle all the needed logging actions.
+
+At the main application server is running web server with Enrollment Provider, Enrollment Repository and Notification center containers.
+
+Last but not least is the queue, with also its own server, because it needs to handle all the queue requests.
+![](embed:ProductionDiagram)
+
+#### Development diagram
 TODO: Description 
 TODO: Create the diagram
