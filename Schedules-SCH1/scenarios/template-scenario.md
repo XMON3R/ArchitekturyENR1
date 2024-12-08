@@ -1,5 +1,5 @@
-# Scenario template
-## Design-time/Run-time dimensions - Type
+## Scenario template
+### Design-time/Run-time dimensions - Type
 
 - Source
 
@@ -13,9 +13,11 @@
 
 - Measure
 
+#### Architecture update
 
-# Scenario example from the lecture
-## Run-time dimension - Availability
+
+## Scenario example from the lecture
+### Run-time dimension - Availability
 
 - Source: Health Status Service
 
@@ -30,8 +32,8 @@
 - Measure: 2s downtime
 
 
-# Scenario example from the lecture
-## Design-time dimension - Modifiability
+## Scenario example from the lecture
+### Design-time dimension - Modifiability
 
 - Source: Measuring Device
 
