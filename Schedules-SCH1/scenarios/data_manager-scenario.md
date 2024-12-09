@@ -27,4 +27,4 @@ The architecture should inform app frontend about what was wrong with input data
 - Measure with avarage latency of 200 ms
 
 #### Architecture Update
-The architecture handles permissions independently from other requests from frontend, which entwines frontend and data manager. I would consider checking permisions of requests inside data manager
+The architecture handles permissions independently from other requests from frontend, which entwines frontend and data manager. I would consider checking permisions of requests inside data manager.
