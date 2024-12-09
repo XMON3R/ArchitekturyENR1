@@ -18,7 +18,7 @@
 The architecture should be able to handle it. This scenario can happen only in extreme situations which shouldn't arise from normal use.
 
 ## Notification Manager - Changing mail server
-### Run-time dimensions - Modifiability
+### Design-time dimensions - Modifiability
 
 - Source: Notification Manager
 
