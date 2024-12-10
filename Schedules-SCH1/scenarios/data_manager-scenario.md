@@ -7,7 +7,7 @@
 
 - Artifact data manager- schedule requirements/data checker
 
-- Response informs app fronted
+- Response informs an app fronted
 
 - Measure 1 second
 
@@ -18,13 +18,13 @@ The architecture should inform app frontend about what was wrong with input data
 
 - Source app frontend
 
-- Stimulus wants to know if user has permision
+- Stimulus wants to know if user has permission
 
-- Artifact data manager- permision checker
+- Artifact data manager- permission checker
 
-- Response app frontend learns if user has permision
+- Response app frontend learns if user has permission
 
-- Measure with avarage latency of 200 ms
+- Measure with average latency of 200 ms
 
 #### Architecture Update
-The architecture handles permissions independently from other requests from frontend, which entwines frontend and data manager. I would consider checking permisions of requests inside data manager.
+The architecture handles permissions independently from other requests from frontend, which entwines front end and data manager. I would consider checking permissions of requests inside data manager.
