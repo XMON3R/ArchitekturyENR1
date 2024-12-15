@@ -37,3 +37,23 @@ Add AplicationMonitor to monitor data controller
 #### Architecture update
 
 The architecture should be able to handle it, all request are handled by data controller succesfully.
+
+
+## Data Controller - Fetching from multiple external services 
+### Design-time dimensions - Interoperability  
+
+Source: Data Controller
+
+Stimulus: Fetching data from external services
+
+Artifact: Subjects System OR Building Administration System
+
+Enviroment: Design-Time
+
+Response: Normalize fetched data
+
+Measure: Performance was not affected
+
+#### Architecture update
+
+The architecture should have better consistency when fetching data from external.
