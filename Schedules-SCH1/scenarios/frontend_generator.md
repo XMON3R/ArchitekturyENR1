@@ -1,4 +1,4 @@
-## Scenario example from the lecture
+## Schedule Generator - Too many requests at once
 ### Run-time dimension - Scability
 
 - Source: Scheduler
@@ -16,7 +16,7 @@
 #### Architecture Update
 Based on this scenario, the current architecture should hold up, but the Schedule generator component needs to be scalled up, so that many request (for example at the start of a semester) can be resolved without the system failing.
 
-## Scenario example from the lecture
+## App Frontend - Security Attacks
 ### Run-time dimension - Security
 
 - Source: Attacker that wants student data
