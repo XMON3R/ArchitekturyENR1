@@ -1,9 +1,5 @@
 
-## Data controller
-
-#### Architecture update
-
-Add AplicationMonitor to monitor data controller
+## Data controller - Unavailability of schedule database
 
 ### Run-time dimension - Availability
 
@@ -19,12 +15,17 @@ Add AplicationMonitor to monitor data controller
 
 - Measure: 2s downtime
 
+#### Architecture update
+
+Add AplicationMonitor for monitoring data controller
+
+## Data controller - Viewing buildings and schedules info
 
 ### Run-time dimension - Performance
 
 - Source: Student
 
-- Stimulus: Displays information about buildings and scheludes there (500 requests per minute)
+- Stimulus: Displays information about buildings and schedules (500 requests per minute)
 
 - Artifact: Data controller
 
@@ -36,7 +37,7 @@ Add AplicationMonitor to monitor data controller
 
 #### Architecture update
 
-The architecture should be able to handle it, all request are handled by data controller succesfully.
+The architecture should be able to handle it, all request are handled by data controller succesfully, so there is no need for a change.
 
 
 ## Data Controller - Fetching from multiple external services 
