@@ -17,6 +17,7 @@ workspace "Module Schedules" {
         uzivatel = person "Uživatel"
         schedules = softwareSystem "Schedules" {
             app_frontend = container "App Frontend" {
+                entry_point = component "Entry Point"
                 schedule_view = component "Schedule View"
                 building_room_view = component "Building and Room View"
                 sched_appr_view = component "Schedule Approval View"
@@ -155,27 +156,27 @@ workspace "Module Schedules" {
 
         #### APP FRONTEND RELATIONS
 
-        a1 = student -> schedules.app_frontend.schedule_view "Views Schedule"
-        a2 = student -> schedules.app_frontend.building_room_view "Views building and room list"
+        # Relationships for roles accessing entry_point
+        a1 = student -> schedules.app_frontend.entry_point "Accesses main entry point"
+        a2 = ucitel -> schedules.app_frontend.entry_point "Accesses main entry point"
+        a3 = rozvrhar -> schedules.app_frontend.entry_point "Accesses main entry point"
+        a4 = admin -> schedules.app_frontend.entry_point "Accesses main entry point"
 
-        a3 = ucitel -> schedules.app_frontend.schedule_view "Views Schedule"
-        a4 = ucitel -> schedules.app_frontend.building_room_view "Views building and room list"
+        # Entry point connecting to original views
+        a5 = schedules.app_frontend.entry_point -> schedules.app_frontend.schedule_view "Navigates to schedule view"
+        a6 = schedules.app_frontend.entry_point -> schedules.app_frontend.building_room_view "Navigates to building and room list"
+        a7 = schedules.app_frontend.entry_point -> schedules.app_frontend.sched_appr_view "Navigates to approval state"
 
-        a5 = rozvrhar -> schedules.app_frontend.schedule_view "Views Schedule"
-        a6 = rozvrhar -> schedules.app_frontend.building_room_view "Views building and room list"
-        a7 = rozvrhar -> schedules.app_frontend.sched_appr_view "Approves schedule"
+        # Original relationships from views to other components
+        a8 = schedules.app_frontend.schedule_view -> schedules.data_ctrlr "Fetches schedule data"
+        a9 = schedules.app_frontend.schedule_view -> schedules.data_mngr "Checks permissions to view specific schedule using"
 
-        a8 = admin -> schedules.app_frontend.schedule_view "Views Schedule"
-        a9 = admin -> schedules.app_frontend.building_room_view "Views building and room list"
-        a10 = admin -> schedules.app_frontend.sched_appr_view "Views approval state"
+        a10 = schedules.app_frontend.building_room_view -> schedules.data_ctrlr "Fetches data about buildings and rooms"
+        a11 = schedules.app_frontend.building_room_view -> schedules.data_mngr "Sends reservation requests to"
+
+        a12 = schedules.app_frontend.sched_appr_view -> schedules.response_analyzer "Sends schedulers' responses to"
+
         
-        a11 = schedules.app_frontend.schedule_view -> schedules.data_ctrlr "Fetches schedule data"
-        a12 = schedules.app_frontend.schedule_view -> schedules.data_mngr "Checks permissions to view specific schedule using"
-
-        a13 = schedules.app_frontend.building_room_view -> schedules.data_ctrlr "Fetches data about buildings and rooms"
-        a14 = schedules.app_frontend.building_room_view -> schedules.data_mngr "Sends reservation requests to"
-
-        a15 = schedules.app_frontend.sched_appr_view -> schedules.response_analyzer "Sends schedulers' responses to"
         
         ####
 
@@ -316,9 +317,9 @@ workspace "Module Schedules" {
             include "element.parent==schedules"
             include mail_server subjects building_administration
 
-            #excludes
+            #excludes #a13 a14 a15
             exclude L1_1 L1_2 L1_3 L1_4 L1_5 L1_6 L1_7
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
@@ -331,8 +332,8 @@ workspace "Module Schedules" {
         }
 
         component schedules.app_frontend "L3_App_Frontend" {
-            # includes
-            include a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            # includes a13 a14 a15
+            include a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             include ucitel student rozvrhar admin
             include "element.parent==schedules.app_frontend"
             include schedules.data_ctrlr schedules.data_mngr schedules.response_analyzer
@@ -356,9 +357,9 @@ workspace "Module Schedules" {
             include "element.parent==schedules.response_analyzer"
             include schedules.app_frontend schedules.data_ctrlr schedules.schedule_gen
 
-            # excludes
+            # excludes a13 a14 a15
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
             exclude s1 s2 s3 s4 s5
@@ -375,9 +376,9 @@ workspace "Module Schedules" {
             include "element.parent==schedules.data_mngr"
             include schedules.app_frontend schedules.data_ctrlr schedules.schedule_gen
 
-            # excludes
+            # excludes a13 a14 a15
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
             exclude s1 s2 s3 s4 s5
@@ -395,8 +396,9 @@ workspace "Module Schedules" {
             include schedules.data_ctrlr schedules.notif_manager schedules.response_analyzer schedules.data_mngr
 
             # excludes
+            #edit a13 a14 a15
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
@@ -415,8 +417,9 @@ workspace "Module Schedules" {
             include subjects building_administration
 
             # excludes
+            #edit a13 a14 a15
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude s1 s2 s3 s4 s5
@@ -429,7 +432,8 @@ workspace "Module Schedules" {
         }
 
         component schedules.notif_manager "L3_Notification_Manager" {
-            # includes
+            # includes 
+            #edit a13 a14 a15
             include n1 n2 n3 n4
             include "element.parent==schedules.notif_manager"
             include schedules.schedule_gen schedules.data_ctrlr
@@ -437,7 +441,7 @@ workspace "Module Schedules" {
 
             # excludes
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
@@ -448,11 +452,12 @@ workspace "Module Schedules" {
             autolayout lr
         }
 
+        #edit a13 a14 a15
         deployment * development {
             include *
             exclude dum1 dum2
             exclude L2_1 L2_2 L2_3 L2_4 L2_5 L2_6 L2_7 L2_8 L2_9 L2_10 L2_11 L2_12 L2_13 L2_14 L2_15 L2_16 L2_17 L2_18
-            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15
+            exclude a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 
             exclude r1 r2 r3 r4 r5 r6 r7
             exclude dm1 dm2 dm3 dm4 dm5 dm6 dm7 dm8
             exclude d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
