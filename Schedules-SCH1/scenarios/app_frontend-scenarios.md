@@ -35,4 +35,4 @@ The architecture has complex data fetching with many layers of abstraction in pa
 
 #### Architecture update
 
-The architecture should be able to handle it. Container - Data Manager, contains neccessary "checker" components. A more centralized approach may be beneficial to simplify this process.
+The architecture should be able to handle it. Container - Data Manager, contains neccessary "checker" components. A more localized approach may be beneficial to simplify this process.
