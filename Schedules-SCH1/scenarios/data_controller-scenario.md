@@ -57,4 +57,4 @@ Measure: Performance was not affected
 
 #### Architecture update
 
-The architecture should have better consistency when fetching data from external.
+The architecture should have better consistency when fetching data from external.  To solve this problem would be to add extern service: Data Normalization Service. Which takes the data and modifies it into the desired format.
