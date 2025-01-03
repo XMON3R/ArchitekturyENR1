@@ -1,4 +1,4 @@
-
+## Data Manager - Uncertain Validation
 ###  appfronter validation - availability
 
 - Source App fronted
@@ -14,6 +14,7 @@
 #### Architecture Update
 The architecture should inform app frontend about what was wrong with input data. I would consider expanding architecture by component "info sender" that would better communicate with front end.
 
+## Data Manager - Security holdups
 ###  user permision- security
 
 - Source app frontend
