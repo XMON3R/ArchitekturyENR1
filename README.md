@@ -22,11 +22,11 @@ For presentation of features and the C4 model (Milestone 1), view the [Presentat
 Older files with first design ideas of the module are located in [diagrams](/initial_ENR1project/diagrams/) folder.
 
 #### Authors
-Matyáš Černíček
-Jan Čelovský
-Šimon Jůza
-Jan Růžička
-Vojtěch Snop
+Matyáš Černíček,
+Jan Čelovský,
+Šimon Jůza,
+Jan Růžička,
+Vojtěch Snop,
 Rastislav Vojtuš
 
 Tým ENR1, Architektury softwarových systémů 2024
@@ -39,11 +39,11 @@ For the project we were asigned to work on quality atribute scenarios, view [SCH
 For presentation of quality attribute scenarios (Milestone 2), view the [Presentation folder](/given_SCH1project/Schedule-SCH1-presentation/), where you can find it in multiple formats.
 
 #### Authors
-Matyáš Černíček
-Jan Čelovský
-Šimon Jůza
-Jan Růžička
-Vojtěch Snop
+Matyáš Černíček,
+Jan Čelovský,
+Šimon Jůza,
+Jan Růžička,
+Vojtěch Snop,
 Rastislav Vojtuš
 
 Tým ENR1, Architektury softwarových systémů 2024
