@@ -15,9 +15,9 @@ docker run -it --rm -p 8080:8080 -v .:/usr/local/structurizr structurizr/lite
 Then just open http://localhost:8080 in your browser and you can easily navigate across the documentation.
 
 ### Source files
-All neded files for structurizer are stored in [workspace](/initial_ENR1project/workspace/) folder and [features.md](/features.md) is the overview of features, but you can browse them easier via structurizr.
+All neded files for structurizer are stored in [workspace](/initial_ENR1project/workspace/) folder and [features.md](/initial_ENR1project/features.md) is the overview of features, but you can browse them easier via structurizr.
 
-Older files with first design ideas of the module are located in [diagrams](/diagrams/) folder.
+Older files with first design ideas of the module are located in [diagrams](/initial_ENR1project/diagrams/) folder.
  
 #### Authors
 MaCe
