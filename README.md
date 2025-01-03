@@ -18,13 +18,18 @@ Then just open http://localhost:8080 in your browser and you can easily navigate
 All neded files for structurizer are stored in [workspace](/initial_ENR1project/workspace/) folder and [features.md](/initial_ENR1project/features.md) is the overview of features, but you can browse them easier via structurizr.
 
 Older files with first design ideas of the module are located in [diagrams](/initial_ENR1project/diagrams/) folder.
- 
+
+
+# Given Project - SCH1 Scheduling module 
+
+For the project we were asigned to work on quality atribute scenarios, view [SCH1 Project](/given_SCH1project/).
+
 #### Authors
-MaCe
-JaČe
-JaRů
-VoSn
-RaVo
-ŠiJů
+Matyáš Černíček
+Jan Čelovský
+Šimon Jůza
+Jan Růžička
+Vojtěch Snop
+Rastislav Vojtuš
 
 Tým ENR1, Architektury softwarových systémů 2024
