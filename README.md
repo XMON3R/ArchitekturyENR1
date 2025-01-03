@@ -5,7 +5,7 @@ The enrollment module of the students information system is responsible for hand
 
 ### Documentation
 
-You can run structurizr from workspace directory: 
+You can run structurizr from workspace directory as a subdirectory in "initial ENR1 project": 
 
 ```bash
 docker pull structurizr/lite
